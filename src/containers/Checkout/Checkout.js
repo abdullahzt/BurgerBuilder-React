@@ -26,11 +26,11 @@ class Checkout extends Component {
     }
 
     checkoutCancelledHandler = () => {
-        this.props.history.goBack();
+        this.props.history.replace('/');
     }
 
     checkoutContinuedHandler = () => {
-        this.props.history.push('/checkout/contact-data');
+        this.props.history.replace('/checkout/contact-data');
     }
 
     render() {
