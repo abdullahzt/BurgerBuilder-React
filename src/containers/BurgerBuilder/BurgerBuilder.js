@@ -8,7 +8,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import * as actionTypes from '../../store/actions';
+import * as burgerBuilderAction from '../../store/actions/';
 
 import axios from '../../axios-orders';
 
@@ -50,8 +50,6 @@ class BurgerBuilder extends Component {
     }
 
     render() {
-
-        console.log(this.props.ingredients)
 
         const disabledInfo = {
             ...this.props.ingredients
@@ -112,8 +110,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded: (ingredientName) => dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName }),
-        onIngredientRemoved: (ingredientName) => dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName })
+        onIngredientAdded: (ingredientName) => dispatch(
+            burgerBuilderAction.addIngredient(ingredientName)
+        ),
+        onIngredientRemoved: (ingredientName) => dispatch(
+            burgerBuilderAction.removeIngredient(ingredientName)
+        )
     }
 }
 
