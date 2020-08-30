@@ -12,6 +12,12 @@ class Modal extends Component {
 
     render() {
 
+        // let modalClasses = [classes.Modal, classes.fadeOut]
+
+        // if (this.props.show) {
+        //     modalClasses = [classes.Modal, classes.fadeIn]
+        // }
+
         return (
             <Aux>
                 <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
