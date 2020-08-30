@@ -111,10 +111,11 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            orderData: formData
+            orderData: formData,
+            userID: this.props.userID
         }
 
-        this.props.onOrderBurger(order)
+        this.props.onOrderBurger(order, this.props.token)
     }
 
     checkValidity(value, rules) {
@@ -140,7 +141,7 @@ class ContactData extends Component {
             ...this.state.orderForm
         }
 
-        //clone was made, but not deep clone as order form as objects inside
+        //clone was made, but not deep clone as order form has objects inside
 
         const updatedFormElement = {
             ...updatedOrderForm[inputIdentifier]
@@ -208,13 +209,15 @@ const mapStateToProps = state => {
     return {
         ingredients: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.token,
+        userID: state.auth.userID
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+        onOrderBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
     }
 }
 
