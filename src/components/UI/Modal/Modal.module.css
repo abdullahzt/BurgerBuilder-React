@@ -34,41 +34,22 @@
     }
 }
 
-
-/* Custom animation is production */
-
-
-/* .fadeIn {
-    animation: appear 0.9s cubic-bezier(0, 1.45, .38, .15)forwards;
+.fade-enter {
+    opacity: 0;
+    left: 5%;
 }
 
-.fadeOut {
+.fade-enter-active {
     left: 15%;
-    animation: disappear 0.9s linear forwards;
+    opacity: 1;
 }
 
-@keyframes appear {
-    0% {
-        opacity: 0;
-    }
-    80% {
-        opacity: 0;
-    }
-    100% {
-        left: 15%;
-        opacity: 1;
-    }
+.fade-exit {
+    left: 5%;
+    opacity: 0;
 }
 
-@keyframes disappear {
-    0% {
-        opacity: 1;
-    }
-    20% {
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(-50vw);
-        opacity: 0;
-    }
-} */
+.fade-exit-active {
+    left: 5%;
+    opacity: 0;
+}
