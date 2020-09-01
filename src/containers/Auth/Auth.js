@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -126,21 +127,32 @@ class Auth extends Component {
             authRedirect = < Redirect to={this.props.authRedirectPath} />
         }
 
+        const animationClasses = {
+            enter: classes["fade-enter"],
+            enterDone: classes["fade-enter-active"],
+            exit: classes["fade-exit"],
+            exitDone: classes["fade-exit-active"]
+        }
+
         return (
-            <div className={classes.Auth} >
-                { authRedirect }
-                {errorMessage}
-                <form onSubmit={this.submitHandler} >
-                    {form}
-                    <Button buttonType="Success">{this.state.isSignUp ? "Register" : "Login"}</Button>
-                </form>
-                    <Button 
-                        buttonType="Danger"
-                        clicked={this.switchAuthHandler}
-                    >
-                        Switch To {this.state.isSignUp ? "Sign In" : "Sign Up"}
-                    </Button>
-            </div>
+            <SwitchTransition mode={"out-in"} >
+                <CSSTransition key={this.state.isSignUp ? "Sign In" : "Sign Up"} classNames={animationClasses} >
+                <div className={classes.Auth} >
+                    { authRedirect }
+                    {errorMessage}
+                    <form onSubmit={this.submitHandler} >
+                        {form}
+                        <Button buttonType="Success">{this.state.isSignUp ? "Register" : "Login"}</Button>
+                    </form>
+                        <Button 
+                            buttonType="Danger"
+                            clicked={this.switchAuthHandler}
+                        >
+                            Switch To {this.state.isSignUp ? "Sign In" : "Sign Up"}
+                        </Button>
+                </div>
+                </CSSTransition>
+            </SwitchTransition>
         )
     }
 
